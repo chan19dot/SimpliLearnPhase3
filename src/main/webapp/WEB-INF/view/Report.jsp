@@ -22,7 +22,9 @@ String Id =  f.getUid() +"" ;
 
 <tr><td><%=Id %></td><td><%=f.getUname() %></td><td><%=f.getUpassword() %></td><td><%=f.getDateofpurchase() %></td><td><%=f.getTotalamount() %></td><td><%=f.getCategory() %></td></tr>
 <%} %>
+</table>
 
+<a href="/admin/purchasereports">Click here to go back to the sorting page</a>
 
 </body>
 </html>

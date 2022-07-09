@@ -38,9 +38,7 @@ public class MainController {
 
     @RequestMapping(path="/", method = RequestMethod.GET)
     public String hello() {
-        System.out.println("hit");
         long a = adminDao.count();
-        System.out.print(a);
         return "login";
     }
     
@@ -51,16 +49,12 @@ public class MainController {
     	String Adminpass = req.getParameter("Apass");
     	Admin ad= adminDao.findByAdmin(Adminname);
     	if(ad.getAdminpass().equals(Adminpass) ) {
-//    		mv.setViewName("hello");
-    		System.out.println(ad.getAdminpass());
     		mv.addObject("admin", ad);
     		mv.setViewName("hello");
     	}
     	else {
     		mv.setViewName("login");
     	}
-    	System.out.println(Adminname);
-    	
     	return mv;
     	
     }
@@ -68,9 +62,6 @@ public class MainController {
     @RequestMapping(path="admin/purchasereports")
     public ModelAndView SortingUsers(HttpServletRequest req,HttpServletResponse res) {
     	List<String> cat = userDao.findDistinctCategories();
-    	for(String i: cat) {
-    		System.out.println(i);
-    	}
     	ModelAndView mv = new ModelAndView();
     	mv.addObject("categories", cat);
     	mv.setViewName("filter");
@@ -81,20 +72,14 @@ public class MainController {
     public ModelAndView SortedUsers(HttpServletRequest req,HttpServletResponse res) {
     	String category = req.getParameter("category");
     	Date date = Date.valueOf(req.getParameter("date"));
-    	System.out.println(date);
-    	System.out.println(category);
-    	
     	ModelAndView mv = new ModelAndView();
     	List<User> list= userDao.findByCategoryAndDate(category, date);
     	
-    	if(list !=null) {
+    	if(!list.isEmpty()) {
     		mv.addObject("ReportList", list);
-    		System.out.println(list.get(0).getUname());
         	mv.setViewName("Report");
-        	return mv;
     	}
     	else {
-    		System.out.println("else block");
     		mv.setViewName("NoReports");
     	}
     	return mv;
@@ -142,7 +127,6 @@ public class MainController {
     public ModelAndView manageProducts(HttpServletRequest req,HttpServletResponse res) {
     	ModelAndView mv = new ModelAndView();
     	long c = productDao.count();
-    	System.out.println(c);
     	List<Product> products = productDao.findAll();
     	mv.addObject("products", products);
     	mv.setViewName("manageproducts");
@@ -152,7 +136,6 @@ public class MainController {
     @RequestMapping(path="admin/manageproduct/edit")
     public String updateProducts(HttpServletRequest req,HttpServletResponse res, @RequestParam("id") String id) {
     	int id1 = Integer.parseInt(id);
-    	System.out.println(id1);
     	Product prod = productDao.getById(id1);
     	return "editProduct";
     }

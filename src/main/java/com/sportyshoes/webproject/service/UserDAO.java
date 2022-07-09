@@ -1,6 +1,7 @@
 package com.sportyshoes.webproject.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class UserDAO {
 	}
 	
 	public List<User> findByCategoryAndDate(String Category, Date date){
-		return repo.findByCategoryAndDate(Category, date);
+		List<User> l=repo.findByCategoryAndDate(Category, date);
+		if(l !=null) {
+			return l;
+		}
+		else {
+			return new ArrayList<>();
+		}
 	}
 }

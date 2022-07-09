@@ -8,5 +8,7 @@
 </head>
 <body>
 No reports to display
+
+<a href="/admin/purchasereports">Click here to go to the sorting page</a>
 </body>
 </html>
